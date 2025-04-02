@@ -1,0 +1,117 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    text-align: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 20px;
+    color: #333;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+textarea {
+    width: 100%;
+    height: 80px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.chat-box {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background: #f9f9f9;
+    text-align: left;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.chat {
+    padding: 8px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+.chat.user {
+    background: #d1e7fd;
+}
+
+.chat.ai {
+    background: #fddddd;
+}
+
+.chat.error {
+    color: red;
+    font-weight: bold;
+}
+
+#adminLogin {
+  background: #222;
+  color: lime;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 300px;
+  margin: 50px auto;
+  text-align: center;
+  box-shadow: 0px 0px 15px rgba(0, 255, 0, 0.3);
+}
+
+#adminLogin input {
+  width: 80%;
+  padding: 10px;
+  margin: 10px;
+  border: 2px solid lime;
+  background: #111;
+  color: lime;
+  font-family: 'Press Start 2P', cursive;
+}
+
+#adminLogin button {
+  background: lime;
+  color: black;
+  text-shadow: 1px 1px 2px white;
+  box-shadow: 0px 4px 6px rgba(0, 255, 0, 0.3);
+}
+
+#adminLogin button:hover {
+  background: #00cc00;
+}
+
+.hidden {
+  display: none;
+}
