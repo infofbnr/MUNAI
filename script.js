@@ -276,19 +276,66 @@ window.logOut = logOut;
 // Function to activate premium if the code is valid
 function activatePremiumCode() {
     const premiumCode = document.getElementById("premiumCodeInput").value.trim();
-    const validPremiumCode = "premium34343"; // This is the code for premium access
+    const validPremiumCodes = JSON.parse(localStorage.getItem("validPremiumCodes")) || ["prem4876", "mun#32", "wlcoo3444"];  // Example list of valid premium codes
+    const usedCodes = JSON.parse(localStorage.getItem("usedPremiumCodes")) || [];  // Get used codes from localStorage (or initialize as an empty array)
 
-    if (premiumCode === validPremiumCode) {
-        localStorage.setItem("userStatus", "premium");
-        localStorage.setItem("messageCount", 0); // Reset message count to allow unlimited messages
-        alert("Premium access granted!");
-        updateMessageStatus(0); // Update message status to reflect unlimited messages
-        document.getElementById("submitBtn").disabled = false; // Enable submit button if it was disabled
-        hidePremiumSection(); // Hide the premium activation section
-    } else {
+    // Check if the premium code is in the valid codes list
+    const codeIndex = validPremiumCodes.indexOf(premiumCode);
+
+    if (codeIndex === -1) {
         alert("Invalid premium code.");
+        return; // Stop further execution if code is not found
     }
+
+    // Check if the premium code has already been used
+    if (usedCodes.includes(premiumCode)) {
+        alert("This premium code has already been used.");
+        return; // Stop further execution if code has been used
+    }
+
+    // Code is valid and hasn't been used yet
+    // Grant premium access
+    localStorage.setItem("userStatus", "premium");
+    localStorage.setItem("messageCount", 0); // Reset message count to allow unlimited messages
+
+    // Mark the code as used by adding it to the used codes list
+    usedCodes.push(premiumCode);
+    localStorage.setItem("usedPremiumCodes", JSON.stringify(usedCodes));  // Store updated list of used codes
+
+    // Remove the used code from the valid codes list
+    validPremiumCodes.splice(codeIndex, 1); // Remove the used code from the list
+    localStorage.setItem("validPremiumCodes", JSON.stringify(validPremiumCodes)); // Store updated list of valid codes
+
+    // Store the code that the user used in localStorage, so it can be checked on login
+    localStorage.setItem("usedPremiumCode", premiumCode);
+
+    alert("Premium access granted!");
+    updateMessageStatus(0); // Update message status to reflect unlimited messages
+    document.getElementById("submitBtn").disabled = false; // Enable submit button if it was disabled
+    hidePremiumSection(); // Hide the premium activation section
 
     // Clear input field after submission
     document.getElementById("premiumCodeInput").value = "";
 }
+
+function checkIfUserHasPremium() {
+    // Check if the user has already used a premium code
+    const usedPremiumCode = localStorage.getItem("usedPremiumCode");
+
+    if (usedPremiumCode) {
+        // If a code was used, prompt the user to enter the same code again
+        const userEnteredCode = prompt("Please enter your premium code to log back in:");
+
+        if (userEnteredCode === usedPremiumCode) {
+            alert("Logged in with premium access.");
+            localStorage.setItem("userStatus", "premium");
+            localStorage.setItem("messageCount", 0); // Reset message count to allow unlimited messages
+        } else {
+            alert("Incorrect code. You must use the same code that was used previously.");
+        }
+    } else {
+        alert("No premium code found. Please enter a valid code.");
+    }
+}
+
+
