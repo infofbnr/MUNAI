@@ -18,11 +18,11 @@ function simpleDecode(encodedKey) {
 // Example encoded key from Python for decoding
 const encodedKey = "AAJAAB4KAUgbAjkkJTQnXj8jMlwpFRQjA1MrIyYXIC1dJzMuEh8rBChXXTIXOgxcQVtWBCNOHDYUQ14HCi8MGCM8Rwk0HxYcMCwZQzsyAwYmFz1eMgAHACMzKT4eQhkOXQcaIlBcCDUmPlEJMT8EHQEdKgIRQAU5MwZUOQQNKQ1fGAEAGCwgRAIIHRVTIhMrBhE5HlRQGQomIz4dGilRX1xIRyg=" ;
 const apiKey = simpleDecode(encodedKey);
-
+console.log(apiKey);
 let aiPosition = "";
 let userPosition = ""; 
 
-async function generateDebateTopic() {
+async function generateDebateTopic(category) {
     const topicElement = document.getElementById("topic");
     const chatBox = document.getElementById("chatBox");
     const userInput = document.getElementById("userInput");
@@ -34,6 +34,20 @@ async function generateDebateTopic() {
     userInput.value = "";
     userInput.disabled = true;
     submitButton.disabled = true;
+
+    // Define AI prompt based on category
+    let categoryPrompt = "";
+    switch (category) {
+        case "fun":
+            categoryPrompt = "Generate a **funny and lighthearted** MUN debate topic that people will enjoy debating.";
+            break;
+        case "competitive":
+            categoryPrompt = "Generate a **serious, logical, and competitive** MUN debate topic that requires strong arguments.";
+            break;
+        case "political":
+            categoryPrompt = "Generate a **real-world political debate** topic that is commonly discussed in Model United Nations.";
+            break;
+    }
 
     try {
         const response = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -47,10 +61,14 @@ async function generateDebateTopic() {
                 messages: [
                     { 
                         role: "system", 
-                        content: `Generate funny topics for an MUN debate. Imagine you are a master at making topics for an MUN debate, and you can give so creative topics that users will love a lot. For example: Pineapple belongs on pizza. or, Winter is better than summer... etc. Don't repeat the same topic twice, be original and creative.`
+                        content: `You are an expert MUN debate topic generator. Your job is to create UNIQUE, engaging, and fair debate topics. The topics should be thought-provoking and match the given category.
 
+                        **Category:** ${category.toUpperCase()}  
+                        - Topics should be **one line** and **not a question**.
+                        - Avoid repeating previous topics.
+                        - Format topics in a **neutral statement**, e.g., "Cats are superior to dogs." instead of "Are cats better than dogs?".`
                     },
-                    { role: "user", content: "Give me a one-line debate topic that is fair and engaging, and **not a question**." }
+                    { role: "user", content: `Give me one ${categoryPrompt} as a single sentence.` }
                 ]
             })
         });
@@ -66,7 +84,6 @@ async function generateDebateTopic() {
             }
 
             topicElement.innerText = `Debate Topic: ${topic}`;
-
             chatBox.innerHTML += `<div class="chat ai"><strong>Delegate:</strong> Let's start the debate. Please state your position on this topic (either "for" or "against").</div>`;
 
             userInput.disabled = false;
@@ -85,13 +102,17 @@ async function generateDebateTopic() {
 // Function to set the user's stance
 function setUserPosition(position) {
     userPosition = position === "for" ? "for" : "against";
-    aiPosition = userPosition === "for" ? "against" : "for";  // AI takes the opposite position
+    aiPosition = userPosition === "for" ? "against" : "for";  
 
     const chatBox = document.getElementById("chatBox");
+
+    // Clear previous user position messages if any
+    chatBox.innerHTML = "";
+
     chatBox.innerHTML += `<div class="chat user"><strong>You:</strong> I am ${userPosition} the topic.</div>`;
     scrollToBottom();
 
-    // Now the user has set their stance, AI will respond accordingly
+    // AI acknowledges the stance
     chatBox.innerHTML += `<div class="chat ai"><strong>Delegate:</strong> I will argue ${aiPosition === "for" ? "in favor of" : "against"} the topic.</div>`;
     scrollToBottom();
 }
@@ -161,7 +182,7 @@ function hidePremiumSection() {
         premiumCodeSection.style.display = "none"; // Hide the premium code input section
     }
 }
-
+let hasChosenStance = false;
 async function submitDebate() {
     const userInput = document.getElementById("userInput").value.trim();
     const chatBox = document.getElementById("chatBox");
@@ -174,7 +195,20 @@ async function submitDebate() {
     scrollToBottom();
 
     submitButton.disabled = true;
+    if (!hasChosenStance && (userInput === "for" || userInput === "against")) {
+        setUserPosition(userInput);
+        hasChosenStance = true;
+        submitButton.disabled = false;
+        return;
+    }
 
+    // **If stance is not chosen yet, ask again**
+    if (!hasChosenStance) {
+        chatBox.innerHTML += `<div class="chat ai"><strong>Delegate:</strong> Please state your position first: 'for' or 'against' the topic.</div>`;
+        scrollToBottom();
+        submitButton.disabled = false;
+        return;
+    }
     try {
         // Check if the free trial limit is reached before submitting the debate
         let messageCount = parseInt(localStorage.getItem("messageCount") || 0);
@@ -195,7 +229,7 @@ async function submitDebate() {
             body: JSON.stringify({
                 model: "gpt-4o-mini",
                 messages: [
-                    { role: "system", content: `You are an MUN delegate taking a firm stance. The debate topic is: "${document.getElementById("topic").innerText}". The user is arguing ${userPosition}, so you must argue ${aiPosition}. Keep responses short (1-2 sentences), logical, and assertive. Keep in mind, you can be a little fun too, not only serious. Use logical proofs, although they may not be true.` },
+                    { role: "system", content: `You are an MUN delegate taking a firm stance. The debate topic is: "${document.getElementById("topic").innerText}". The user is arguing ${userPosition}, so you must argue ${aiPosition}. Keep responses short (1-2 sentences), logical, and assertive. Keep in mind, you can be a little fun too, not only serious. Use logical proofs, although they may not be true. Very important: if the user says something unrelated to the topic and makes no sense, call them out for it.` },
                     { role: "user", content: `User's Argument: ${userInput}\nAI's Response:` }
                 ]
             })

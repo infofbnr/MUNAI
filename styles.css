@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: #f4f4f9;
     text-align: center;
     padding: 20px;
@@ -90,7 +90,15 @@ textarea {
   text-align: center;
   box-shadow: 0px 0px 15px rgba(0, 255, 0, 0.3);
 }
-
+.fundebate{
+    background-color: red;
+}
+.compdebate {
+    background-color: orange;
+}
+.polidebate {
+    background-color: rgb(116, 178, 230);
+}
 #adminLogin input {
   width: 80%;
   padding: 10px;

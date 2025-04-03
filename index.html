@@ -12,12 +12,21 @@
         <p>Enter your password if you are paid, if not type FREE for free trial.</p>
         <input type="password" id="adminKey" placeholder="Enter Secret Key">
         <button onclick="login()">Login</button>
-      </div>
+    </div>
     
-      <div id="container" class="container hidden">
+    <div id="container" class="container hidden">
         <h1>MUN AI Debate Assistant</h1>
-        <button onclick="generateDebateTopic()">Generate Debate Topic</button>
-        <h2 id="topic">Click the button to generate a topic</h2>
+
+        <!-- Debate Mode Selection -->
+        <h2>Select Debate Mode:</h2>
+        <div id="categoryButtons">
+            <button onclick="generateDebateTopic('fun')" class="fundebate">Fun Debate</button>
+            <button onclick="generateDebateTopic('competitive')" class="compdebate">Competitive Debate</button>
+            <button onclick="generateDebateTopic('political')" class="polidebate">Political Debate</button>
+
+        </div>
+        
+        <h2 id="topic">Select a debate mode first.</h2>
         
         <div id="chatBox" class="chat-box"></div>
     
@@ -33,8 +42,9 @@
         <!-- Log Out Button -->
         <button id="logOutBtn" onclick="logOut()">Log Out</button>
     </div>
-    <h3>Contact mano on WhatsApp by clicking <a href="https://wa.me/+96181243405/" target="_blank">here</a> for more info on premium.</h3>
-    <h3>The topics are funny for now, just to get the hang of it.</h3>
+
+    <h3>Contact Mano on WhatsApp by clicking <a href="https://wa.me/+96181243405/" target="_blank">here</a> for more info on premium.</h3>
+
     <script src="script.js"></script>
 </body>
 </html>
