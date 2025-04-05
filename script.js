@@ -18,7 +18,6 @@ function simpleDecode(encodedKey) {
 // Example encoded key from Python for decoding
 const encodedKey = "AAJAAB4KAUgbAjkkJTQnXj8jMlwpFRQjA1MrIyYXIC1dJzMuEh8rBChXXTIXOgxcQVtWBCNOHDYUQ14HCi8MGCM8Rwk0HxYcMCwZQzsyAwYmFz1eMgAHACMzKT4eQhkOXQcaIlBcCDUmPlEJMT8EHQEdKgIRQAU5MwZUOQQNKQ1fGAEAGCwgRAIIHRVTIhMrBhE5HlRQGQomIz4dGilRX1xIRyg=" ;
 const apiKey = simpleDecode(encodedKey);
-console.log(apiKey);
 let aiPosition = "";
 let userPosition = ""; 
 
