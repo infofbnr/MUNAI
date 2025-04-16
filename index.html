@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MUN Central</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
+  <nav class="bg-white shadow p-4">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold">MUN Central</h1>
+      <div class="space-x-4">
+        <a href="/debate/" class="text-blue-600 hover:underline">Debate</a>
+        <a href="/trainer/" class="text-blue-600 hover:underline">Trainer</a>
+        <a href="/pnm/" class="text-blue-600 hover:underline">Points & Motions</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-grow flex items-center justify-center p-6">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-4">Welcome to the MUN Toolkit</h2>
+      <p class="text-lg mb-8 text-gray-600">Sharpen your skills, train with realistic scenarios, and master every motion and point used in committee. Whether you're a first-timer or a seasoned delegate, this is your command center.</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <a href="/debate/" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold mb-2 text-blue-700">Debate Simulator</h3>
+          <p class="text-gray-600">Engage in dynamic debate scenarios and test your responses in real-time.</p>
+        </a>
+        <a href="/trainer/" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold mb-2 text-green-700">Trainer Game</h3>
+          <p class="text-gray-600">Answer quickfire prompts to practice motions and points interactively.</p>
+        </a>
+        <a href="/pnm/" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold mb-2 text-purple-700">Points & Motions</h3>
+          <p class="text-gray-600">View and learn every MUN point and motion with detailed descriptions.</p>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-white text-center p-4 text-sm text-gray-500">
+    &copy; 2025 MUN Central. All rights reserved.
+  </footer>
+</body>
+</html>
