@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MUN Trainer</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow p-4 mb-6">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold">MUN Trainer</h1>
+      <div class="space-x-4">
+        <a href="../debate/" class="text-blue-600 hover:underline">Debate</a>
+        <a href="../trainer/" class="text-blue-600 hover:underline">Trainer</a>
+        <a href="/points&motions/" class="text-blue-600 hover:underline">Points & Motions</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Game Area -->
+  <div class="max-w-2xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+    <h2 class="text-2xl font-bold mb-4 text-center">MUN Points & Motion Trainer</h2>
+    <div id="scoreCounter" class="text-center text-sm text-gray-500 mb-4">Score: 0/5</div>
+    
+    <div id="scenarioBox" class="bg-gray-50 border p-4 rounded mb-4">Click the button to get a scenario.</div>
+    
+    <input id="userAnswer" type="text" placeholder="Type your motion or point..." class="w-full p-3 border rounded mb-4" />
+    
+    <button onclick="submitAnswer()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Submit</button>
+    
+    <div id="feedback" class="mt-4 text-center text-lg font-semibold"></div>
+    
+    <button id="newScenarioBtn" onclick="getScenario()" class="mt-6 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 w-full">New Scenario</button>
+    <button id="restartBtn" onclick="restartGame()" class="mt-4 hidden bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 w-full">Restart</button>
+  </div>
+
+  <script src="trainer.js"></script>
+</body>
+</html>
