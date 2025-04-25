@@ -27,14 +27,15 @@
     <div id="scoreCounter" class="text-center text-sm text-gray-500 mb-4">Score: 0/5</div>
     
     <div id="scenarioBox" class="bg-gray-50 border p-4 rounded mb-4">Click the button to get a scenario.</div>
+
+    <div id="choices" class="flex flex-col gap-2 my-4">
+        <!-- Choice buttons injected here -->
+    </div>
     
-    <input id="userAnswer" type="text" placeholder="Type your motion or point..." class="w-full p-3 border rounded mb-4" autocomplete="off"/>
-    
-    <button onclick="submitAnswer()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Submit</button>
-    
+    <div id="timer" class="text-lg font-semibold text-blue-600">Time left: 10s</div>
     <div id="feedback" class="mt-4 text-center text-lg font-semibold"></div>
-    
-    <button id="newScenarioBtn" onclick="getScenario()" class="mt-6 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 w-full">New Scenario</button>
+
+    <button id="newScenarioBtn" onclick="generateRound()" class="mt-6 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 w-full">New Round</button>
     <button id="restartBtn" onclick="restartGame()" class="mt-4 hidden bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 w-full">Restart</button>
   </div>
 
