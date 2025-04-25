@@ -14,7 +14,7 @@ const data = {
       "Motion to Exit the Room to Research": "Used to exit the room in order to research something, under the observation of an usher or chair.",
       "Motion to Request Information from Chairs": "Used to ask the chairs for information on a specific topic.",
       "Motion to Clarify State Position": "Used to clarify the state position of a delegate after an EDC (Events, Developments, and Crises).",
-      "Motion to Refine State Position": "Used to ask a delegate's nation to alter their state policy.",
+      "Motion to Refine State Position":"Used to ask a delegate's nation to alter their state policy.",
       "Motion to Request State Action": "Used by delegates to ask for a state to take positive or negative action.",
       "Motion to Appeal Chair's Decision": "Used to appeal a decision made by the chairs.",
       "Motion to Set Speaking Time": "Sets or changes the speaking time for speeches.",
